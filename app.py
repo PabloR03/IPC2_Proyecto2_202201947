@@ -94,7 +94,7 @@ class ventana_principal:
     #Funcion para el boton AYUDA
     def ayuda(self):
         messagebox.showinfo("AYUDA", "Programa Realizado por: Pablo Andres Rodriguez Lima \n Curso: IPC2 Seccion D \n USAC \n Segundo Semestre 2023 \n \n La ayuda se encuentra en el archivo Documentacion_IPC2_Proyecto2_202201947.pdf \n (Se abrira automaticamente al cerrar esta ventana)")
-        archivo = "C:\\Users\\rodri\\Documentos\\U\\SEMESTRE 4\\LABORATORIO IPC2\\PRACTICA 2\\Entregable\\IPC2_Proyecto2_202201947\\[IPC2]Proyecto_2_2S2023-v2.pdf"
+        archivo = "C:\\Users\\rodri\\Documentos\\U\\SEMESTRE 4\\LABORATORIO IPC2\\PRACTICA 2\\Entregable\\IPC2_Proyecto2_202201947\\20220147_Documentacion.pdf"
         try:
             # Abre el archivo PDF con el visor de PDF predeterminado en Windows
             subprocess.Popen(["start", "", archivo], shell=True)
