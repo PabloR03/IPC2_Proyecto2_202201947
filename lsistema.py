@@ -1,6 +1,6 @@
-from nsistema import nodo_sistema
+from nsistema import n_sistemaDrones
 import os
-class lista_doble_sistema:
+class listaSistemaDrones:
 
     def __init__(self):
         # Referencia al primer nodo
@@ -10,7 +10,7 @@ class lista_doble_sistema:
 
     def insertar_sistema(self, sistema):
         # Creamos un nuevo nodo con el objeto proporcionado
-        nuevo_nodo = nodo_sistema(sistema=sistema) 
+        nuevo_nodo = n_sistemaDrones(sistema=sistema) 
         # Si la lista está vacía
         if self.cabeza is None:
             # El nuevo nodo se convierte en la cabeza 
@@ -58,15 +58,15 @@ class lista_doble_sistema:
                 contador_altura+=1
             texto+="""</TR>"""
 
-            nodo_dron=actual.sistema.lista_dron.cabeza
-            while nodo_dron is not None:
+            n_dron=actual.sistema.lista_dron.cabeza
+            while n_dron is not None:
                 texto+="""<TR>"""
-                texto+="""<TD style="radial" bgcolor="steelblue"  gradientangle="60">"""+nodo_dron.dron.nombre_dron+"""</TD>\n"""
-                nodo_contenido = nodo_dron.dron.lista_contenido.cabeza
-                while nodo_contenido is not None:
-                    texto+="""<TD style="radial" bgcolor="skyblue" gradientangle="60">"""+nodo_contenido.contenido.simbolo_altura+"""</TD>\n"""
-                    nodo_contenido=nodo_contenido.siguiente
-                nodo_dron=nodo_dron.siguiente
+                texto+="""<TD style="radial" bgcolor="steelblue"  gradientangle="60">"""+n_dron.dron.nombre_dron+"""</TD>\n"""
+                n_caracteres = n_dron.dron.lista_contenido.cabeza
+                while n_caracteres is not None:
+                    texto+="""<TD style="radial" bgcolor="skyblue" gradientangle="60">"""+n_caracteres.contenido.simbolo_altura+"""</TD>\n"""
+                    n_caracteres=n_caracteres.siguiente
+                n_dron=n_dron.siguiente
                 texto+="""</TR>"""
 
             texto+="""</TABLE>>];\n}"""

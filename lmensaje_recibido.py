@@ -2,10 +2,10 @@ import xml.etree.ElementTree as ET
 # Importa tkinter
 import tkinter as tk
 from tkinter import messagebox
-from nmensaje_recibido import nodo_mensaje_recibido
+from nmensaje_recibido import n_MensajeIntercambiado
 import os
 
-class lista_doble_mensaje_recibido:
+class listaMensajeIntercambiado:
 
     def __init__(self):
         # Referencia al primer nodo
@@ -15,7 +15,7 @@ class lista_doble_mensaje_recibido:
 
     def insertar_mensaje_recibido(self, mensaje_recibido):
         # Creamos un nuevo nodo con el objeto proporcionado
-        nuevo_nodo = nodo_mensaje_recibido(mensaje_recibido=mensaje_recibido) 
+        nuevo_nodo = n_MensajeIntercambiado(mensaje_recibido=mensaje_recibido) 
         # Si la lista está vacía
         if self.cabeza is None:
             # El nuevo nodo se convierte en la cabeza 
@@ -87,18 +87,18 @@ class lista_doble_mensaje_recibido:
                 tiempo= ET.SubElement(instrucciones, "tiempo")
                 tiempo.set("valor", str(contador_tiempo))
                 acciones=ET.SubElement(tiempo, "acciones")
-                nodo_dron=actual.mensaje_recibido.lista_dron_recibido.cabeza
-                while nodo_dron is not None:
-                    nodo_instruccion=nodo_dron.dron_recibido.lista_instruccion_dron.cabeza
-                    while nodo_instruccion is not None:
-                        if nodo_instruccion.instruccion_dron.tiempo==contador_tiempo:
+                n_dron=actual.mensaje_recibido.lista_dron_recibido.cabeza
+                while n_dron is not None:
+                    n_Indicaciones=n_dron.dron_recibido.lista_instruccion_dron.cabeza
+                    while n_Indicaciones is not None:
+                        if n_Indicaciones.instruccion_dron.tiempo==contador_tiempo:
                             dron=ET.SubElement(acciones, "Dron")
-                            dron.set("nombre",  nodo_dron.dron_recibido.nombre_dron)
-                            dron.text=nodo_instruccion.instruccion_dron.accion
+                            dron.set("nombre",  n_dron.dron_recibido.nombre_dron)
+                            dron.text=n_Indicaciones.instruccion_dron.accion
                             break
                         else:
-                            nodo_instruccion=nodo_instruccion.siguiente
-                    nodo_dron=nodo_dron.siguiente
+                            n_Indicaciones=n_Indicaciones.siguiente
+                    n_dron=n_dron.siguiente
                 contador_tiempo+=1
             actual = actual.siguiente
 

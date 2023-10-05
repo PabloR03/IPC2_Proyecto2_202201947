@@ -5,39 +5,39 @@ from tkinter import messagebox, filedialog, scrolledtext, Label, Entry
 import os, subprocess
 #Impotar Listas y Clases
 
-from ldron import lista_doble_dron
+from ldron import listaDron
 from odron import dron
 
-from ldrones import lista_drones
+from ldrones import listaDrones
 from odrones import drones
 
-from lsistema import lista_doble_sistema
+from lsistema import listaSistemaDrones
 from osistema import sistema
 
-from lcontenido import lista_doble_contenido
+from lcontenido import listaCaracteresDrones
 from ocontenido import contenido
 
-from lmensaje import lista_doble_mensaje
+from lmensaje import listaMensaje
 from omensaje import mensaje
 
-from lmensaje_recibido import lista_doble_mensaje_recibido
+from lmensaje_recibido import listaMensajeIntercambiado
 from omensaje_recibido import mensaje_recibido
 
-from ldron_recibido import lista_doble_dron_recibido
+from ldron_recibido import listaDronIntercambiado
 from odron_recibido import dron_recibido
 
-from linstruccion_dron import lista_doble_instruccion_dron
+from linstruccion_dron import listaInstruccionDrones
 from oinstruccion_dron import instruccion_dron
 
-from linstruccion import lista_doble_instruccion
+from linstruccion import listaInstrucciones
 from oinstruccion import instruccion
 
 #Lista Global Par XML Entrada
-listaDronesparaTodo = lista_drones()
-listaSistemaparaTodo= lista_doble_sistema()
-listaMensajeparaTodo = lista_doble_mensaje()
+listaDronesparaTodo = listaDrones()
+listaSistemaparaTodo= listaSistemaDrones()
+listaMensajeparaTodo = listaMensaje()
 #Lista Global Par XML Salida
-listaMensajeResivido = lista_doble_mensaje_recibido()
+listaMensajeResivido = listaMensajeIntercambiado()
 
 
 class ventana_principal:
@@ -75,7 +75,7 @@ class ventana_principal:
         cuadrotexto_frame.configure(width=1260, height=520)
 
         #boton de cargar Archivo XML
-        boton_inicializar=tk.Button(barra_de_opciones, text="CARGAR ARCHIVO XML", command=self.cargar_archivo)
+        boton_inicializar=tk.Button(barra_de_opciones, text="CARGAR ARCHIVO XML", command=self.Archivo_entrada)
         boton_inicializar.place(x=28.75, y=20, width=150, height=60)
 
         #boton de inicializar
@@ -83,7 +83,7 @@ class ventana_principal:
         boton_cargar.place(x=207.5, y=20, width=150, height=60)
 
         #boton salida de Archivo XML
-        boton_salida=tk.Button(barra_de_opciones, text="SALIDA ARCHIVO XML", command=self.generar_xml)
+        boton_salida=tk.Button(barra_de_opciones, text="SALIDA ARCHIVO XML", command=self.Crear_salidaxml)
         boton_salida.place(x=386.25, y=20, width=150, height=60)
 
         #boton tipo menu gestion de gestion de drones (ver listado, agregar al listado)
@@ -95,8 +95,8 @@ class ventana_principal:
         op.add_command(label="VER LISTADO", command=self.mostrar_drones)
         #op.add_command(label="AGREGAR DRON")
 
-        # Definir el botón y asignar la función graficar_drones como su comando
-        boton_grafica = tk.Button(barra_de_opciones, text="GRAFICA DE SISTEMA DE DRONES", command=self.graficar_drones, wraplength=150)
+        # Definir el botón y asignar la función Graficar_drones como su comando
+        boton_grafica = tk.Button(barra_de_opciones, text="GRAFICA DE SISTEMA DE DRONES", command=self.Graficar_drones, wraplength=150)
         boton_grafica.place(x=743.25, y=20, width=150, height=60)
 
 
@@ -106,16 +106,16 @@ class ventana_principal:
             #op del menu
         op=Menu(boton_Gmensajes,tearoff=0)
         boton_Gmensajes["menu"]=op
-        op.add_command(label="VER LISTADO DE MENSAJES E INSTRUCCIONES", command=self.mostrar_lista_mensaje)
+        op.add_command(label="VER LISTADO DE MENSAJES E INSTRUCCIONES", command=self.Lista_mensajes)
         #op.add_command(label="GENERAR SISTEMA DE DRONES CON MENSAJE Y TIEMPO")
         op.add_command(label="CREAR GRAFICA DE INSTRUCCIONES")
         
-        #boton para ayuda
-        boton_ayuda=tk.Button(barra_de_opciones, text="AYUDA", command=self.ayuda)
+        #boton para Ayuda
+        boton_ayuda=tk.Button(barra_de_opciones, text="AYUDA", command=self.Ayuda)
         boton_ayuda.place(x=1100.75, y=20, width=150, height=60)
 
     #Funcion para el boton CARGAR ARCHIVO XML
-    def cargar_archivo(self):
+    def Archivo_entrada(self):
         ruta = tk.Tk()
         ruta.withdraw()
         ruta.attributes('-topmost', True)
@@ -137,13 +137,13 @@ class ventana_principal:
                     altura_maxima = sistema_drones.find('alturaMaxima').text 
                     cantidad_drones = sistema_drones.find('cantidadDrones').text
                     #Lista Contenido Según El Dron
-                    lista_dron=lista_doble_dron()
+                    lista_dron=listaDron()
                     for nivel_contenido in sistema_drones.findall('.//contenido'):
                         nombre_dron_contenido = nivel_contenido.find('dron').text
                         #Se Busca en Lista Dron
                         alturas = nivel_contenido.find('alturas')
                         #Lista Contenido Alturas
-                        lista_contenido=lista_doble_contenido()
+                        lista_contenido=listaCaracteresDrones()
                         for altura in alturas.findall('altura'):
                             altura_contenido = altura.get('valor') 
                             simbolo_altura = altura.text
@@ -161,7 +161,7 @@ class ventana_principal:
                     #Contenido Instrucciones
                     nivel_instrucciones = nivel_mensaje.find('instrucciones')
                     #Lista_Intruccion
-                    lista_instruccion_temporal=lista_doble_instruccion()
+                    lista_instruccion_temporal=listaInstrucciones()
                     for nivel_instruccion in nivel_instrucciones.findall('instruccion'):
                         dron_instruccion = nivel_instruccion.get('dron')
                         altura_dron = nivel_instruccion.text
@@ -169,7 +169,7 @@ class ventana_principal:
                         lista_instruccion_temporal.insertar_instruccion(nueva_instruccion)
                     nuevo_mensaje=mensaje(nombre_mensaje, sistema_drones_mensaje, lista_instruccion_temporal)
                     listaMensajeparaTodo.insertar_mensaje(nuevo_mensaje)
-                self.desencriptar_lista_mensaje()
+                self.Contenido_del_mensajea()
             messagebox.showinfo("Abrir", "Archivo Cargado")
         except Exception as e:
             messagebox.showerror("Error", f"No se ha seleccionado ningún archivo: {str(e)}")
@@ -195,7 +195,7 @@ class ventana_principal:
     def mostrar_drones(self):
 
         #boton que tiene el cuadro de texto para agregar dron
-        self.boton_agregar_dron=tk.Button(self.barra_de_opcionessec, text="AGREGAR DRON", command=self.agregar_dron)
+        self.boton_agregar_dron=tk.Button(self.barra_de_opcionessec, text="AGREGAR DRON", command=self.Nuevo_dron)
         self.boton_agregar_dron.place(x=700, y=11, width=150, height=30)
 
         #poner el boton de agregar dron visible
@@ -206,23 +206,23 @@ class ventana_principal:
             messagebox.showwarning("Error", "No hay archivo cargado")      
 
     #Función Agregar Dron De Gestión De Drones
-    def agregar_dron(self):
+    def Nuevo_dron(self):
         #Obtiene el nombre del dron desde la caja_texto
         nombre_dron = self.text_area.get("1.0", "end-1c")
         #Obtiene la cabeza de la lista de drones
-        nodo_dron = listaDronesparaTodo.cabeza
+        n_dron = listaDronesparaTodo.cabeza
         # Verifica si el nombre del dron es una cadena vacía
         if nombre_dron == "":
             messagebox.showwarning("Error", "Llena el cuadro de texto")
         else:
             # Itera a través de la lista de drones para verificar si el nombre del dron ya existe
-            while nodo_dron:
-                if nodo_dron.dron.nombre == nombre_dron:
+            while n_dron:
+                if n_dron.dron.nombre == nombre_dron:
                     # Si encuentra un dron con el mismo nombre, muestra un mensaje de advertencia y sale de la función
                     messagebox.showwarning("Error", "El Dron ya existe en la lista.")
                     return
                 # Avanza al siguiente nodo en la lista
-                nodo_dron = nodo_dron.siguiente
+                n_dron = n_dron.siguiente
             # Si el nombre del dron no existe en la lista, crea un nuevo dron y lo inserta en la lista
             listaDronesparaTodo.insertar_dron(drones(nombre_dron))
             # Llama a la función para mostrar la lista actualizada
@@ -231,53 +231,53 @@ class ventana_principal:
             messagebox.showinfo("Gestión", "Dron Agregado")
 
 #Función para procesar todos los mensajes del archivo XML de entrada
-    def desencriptar_lista_mensaje(self):
-        nodo_mensaje = listaMensajeparaTodo.cabeza
+    def Contenido_del_mensajea(self):
+        n_Mensaje = listaMensajeparaTodo.cabeza
         nodo_mensaje_variable = listaMensajeparaTodo.cabeza
         #Variables Globales En La Función
         nombre_mensaje_recibido=""
         nombre_sistema_recibido=""
         mensaje_recibido_des=""
         tiempo_optimo_des=0
-        while nodo_mensaje is not None:
+        while n_Mensaje is not None:
             #Se Recorren Todos Los Mensajes
             while nodo_mensaje_variable is not None:
-                if nodo_mensaje.mensaje.nombre_mensaje == nodo_mensaje_variable.mensaje.nombre_mensaje:
+                if n_Mensaje.mensaje.nombre_mensaje == nodo_mensaje_variable.mensaje.nombre_mensaje:
                     #--Nombre Del Mensaje
-                    nombre_mensaje_recibido=nodo_mensaje.mensaje.nombre_mensaje
-                    nodo_sistema = listaSistemaparaTodo.cabeza
+                    nombre_mensaje_recibido=n_Mensaje.mensaje.nombre_mensaje
+                    n_sistemaDrones = listaSistemaparaTodo.cabeza
                     #Se Recorren Los Sistemas Para encontrar Una Coincidencia
-                    while nodo_sistema is not None:
+                    while n_sistemaDrones is not None:
                         #Si el nombre_sistema_dron de mensaje es igual al nombre sistema del sistema 
-                        if nodo_mensaje.mensaje.nombre_sistema_dron == nodo_sistema.sistema.nombre_sistema:
+                        if n_Mensaje.mensaje.nombre_sistema_dron == n_sistemaDrones.sistema.nombre_sistema:
                             #--Nombre Del Sistema
-                            nombre_sistema_recibido=nodo_sistema.sistema.nombre_sistema
-                            nodo_instruccion = nodo_mensaje.mensaje.lista_instruccion.cabeza
+                            nombre_sistema_recibido=n_sistemaDrones.sistema.nombre_sistema
+                            n_Indicaciones = n_Mensaje.mensaje.lista_instruccion.cabeza
                             #Se recorren las instrucciones del mensaje actual
-                            while nodo_instruccion is not None:
-                                nodo_dron = nodo_sistema.sistema.lista_dron.cabeza
+                            while n_Indicaciones is not None:
+                                n_dron = n_sistemaDrones.sistema.lista_dron.cabeza
                                 #Se recorren la lista de dron para buscar el nombre_dron 
-                                while nodo_dron is not None:
+                                while n_dron is not None:
                                     #Si el nombre_dron de la instruccion es igual al nombre_dron del dron
-                                    if nodo_instruccion.instruccion.nombre_dron == nodo_dron.dron.nombre_dron:
-                                        nodo_contenido = nodo_dron.dron.lista_contenido.cabeza
+                                    if n_Indicaciones.instruccion.nombre_dron == n_dron.dron.nombre_dron:
+                                        n_caracteres = n_dron.dron.lista_contenido.cabeza
                                         #Se Recorre el Contenido del dron actual para buscar su altura
-                                        while nodo_contenido is not None:
+                                        while n_caracteres is not None:
                                             #Si la altura del Contenido es la misma que la altura de la instruccion
-                                            if nodo_instruccion.instruccion.altura_dron == nodo_contenido.contenido.altura_dron:
+                                            if n_Indicaciones.instruccion.altura_dron == n_caracteres.contenido.altura_dron:
                                                 #--Mensaje Recibido
-                                                mensaje_recibido_des+=nodo_contenido.contenido.simbolo_altura
-                                            nodo_contenido=nodo_contenido.siguiente
+                                                mensaje_recibido_des+=n_caracteres.contenido.simbolo_altura
+                                            n_caracteres=n_caracteres.siguiente
                                         break #Se rompe la iteracion del dron
                                     #Si el nombre no es igual, se pasa el siguientre dron
                                     else:
-                                        nodo_dron = nodo_dron.siguiente
+                                        n_dron = n_dron.siguiente
                                 #Se pasa la siguiente instrucción
-                                nodo_instruccion = nodo_instruccion.siguiente
+                                n_Indicaciones = n_Indicaciones.siguiente
                             #Se crea un nodo dron para recorrer todos los drones del sistema
-                            nodo_dron_tiempo=nodo_sistema.sistema.lista_dron.cabeza
+                            nodo_dron_tiempo=n_sistemaDrones.sistema.lista_dron.cabeza
                             #Se crea una lista temporal dron recibido
-                            lista_dron_recibido_temporal=lista_doble_dron_recibido()
+                            lista_dron_recibido_temporal=listaDronIntercambiado()
                             #Se recorre cada dron del sistema
                             while nodo_dron_tiempo is not None:
                                 #--Nombre Dron Recibido
@@ -285,9 +285,9 @@ class ventana_principal:
                                 #Contador para saber el segundo
                                 tiempo_optimo=1
                                 #Se crea un nodo instrucción para recorrer todas las instrucciones
-                                nodo_instruccion_mensaje=nodo_mensaje.mensaje.lista_instruccion.cabeza
+                                nodo_instruccion_mensaje=n_Mensaje.mensaje.lista_instruccion.cabeza
                                 #Se crea una lista instrucción dron temporal
-                                lista_instruccion_dron_temporal=lista_doble_instruccion_dron()
+                                lista_instruccion_dron_temporal=listaInstruccionDrones()
                                 #Se recorre cada instrucción del sistema
                                 while nodo_instruccion_mensaje is not None:
                                     #Si el nombre del dron de la instrucción es igual al nombre dron del dron actual
@@ -316,7 +316,7 @@ class ventana_principal:
                                 #Se pasa al siguiente dron
                                 nodo_dron_tiempo=nodo_dron_tiempo.siguiente
                             #Se recorre cada instrucción del sistema
-                            nodo_instruccion_tiempo=nodo_mensaje.mensaje.lista_instruccion.cabeza
+                            nodo_instruccion_tiempo=n_Mensaje.mensaje.lista_instruccion.cabeza
                             #Se recore la lista de instrucciones
                             while nodo_instruccion_tiempo is not None:
                                 #Se aumenta en 1 el tiempo por cada instruccón
@@ -332,16 +332,16 @@ class ventana_principal:
                             break #Se Rompre La Iteracion Del Sistema
                         else:
                             #Se pasa al siguiente sistema
-                            nodo_sistema=nodo_sistema.siguiente
+                            n_sistemaDrones=n_sistemaDrones.siguiente
                     break #Se Rompre La Iteración Del Mensaje
                 else:
                     #Se pasa al siguiente mensaje
                     nodo_mensaje_variable=nodo_mensaje_variable.siguiente
             #Se pasa al siguiente mensaje
-            nodo_mensaje=nodo_mensaje.siguiente
+            n_Mensaje=n_Mensaje.siguiente
 
 #Función General: Generar archivo XML de salida
-    def generar_xml(self):
+    def Crear_salidaxml(self):
         if listaMensajeResivido.cabeza is None:
             messagebox.showwarning("Error", "No hay archivo cargado")
             return
@@ -349,8 +349,8 @@ class ventana_principal:
         messagebox.showinfo("Generar ", "Archivo Xml Generado")
 
     #Funcion para el boton AYUDA
-    def ayuda(self):
-        messagebox.showinfo("AYUDA", "Programa Realizado por: Pablo Andres Rodriguez Lima \n Curso: IPC2 Seccion D \n USAC \n Segundo Semestre 2023 \n \n La ayuda se encuentra en el archivo Documentacion_IPC2_Proyecto2_202201947.pdf \n (Se abrira automaticamente al cerrar esta ventana)")
+    def Ayuda(self):
+        messagebox.showinfo("AYUDA", "Programa Realizado por: Pablo Andres Rodriguez Lima \n Curso: IPC2 Seccion D \n USAC \n Segundo Semestre 2023 \n \n La Ayuda se encuentra en el archivo Documentacion_IPC2_Proyecto2_202201947.pdf \n (Se abrira automaticamente al cerrar esta ventana)")
         archivo = "C:\\Users\\rodri\\Documentos\\U\\SEMESTRE 4\\LABORATORIO IPC2\\PRACTICA 2\\Entregable\\IPC2_Proyecto2_202201947\\20220147_Documentacion.pdf"
         try:
             # Abre el archivo PDF con el visor de PDF predeterminado en Windows
@@ -360,17 +360,17 @@ class ventana_principal:
         except Exception as e:
             print(f"Se produjo un error: {str(e)}")
 
-    def graficar_drones(self):
-        nodo_sistema = listaSistemaparaTodo.cabeza
-        if nodo_sistema is not None:
+    def Graficar_drones(self):
+        n_sistemaDrones = listaSistemaparaTodo.cabeza
+        if n_sistemaDrones is not None:
             listaSistemaparaTodo.graficar_sistema_drones()
             messagebox.showinfo("Gestión", "Sistema Drones Graficados")
         else:
             messagebox.showwarning("Error", "No hay archivo cargado")
 
-    def mostrar_lista_mensaje(self):
+    def Lista_mensajes(self):
         #boton que tiene el cuadro de texto para agregar dron
-        self.boton_agregar_dron=tk.Button(self.barra_de_opcionessec,wraplength=130, text="BUSCAR MENSJAES por nombre", command=self.mostrar_informacion_mensaje)
+        self.boton_agregar_dron=tk.Button(self.barra_de_opcionessec,wraplength=130, text="BUSCAR MENSJAES por nombre", command=self.Info_mensaje_porNombre)
         self.boton_agregar_dron.place(x=700, y=11, width=150, height=30)
         if listaMensajeparaTodo.cabeza is not None:
             listaMensajeparaTodo.mostrar_mensajes_pantalla(self.cuadroTexto)
@@ -378,7 +378,7 @@ class ventana_principal:
         else:
             messagebox.showwarning("Error", "No hay archivo cargado")
 
-    def mostrar_informacion_mensaje(self):
+    def Info_mensaje_porNombre(self):
         #self.cuadroTexto.delete()
         #Se verifica que la lista esté llena
         if listaMensajeResivido.cabeza is None:
@@ -393,14 +393,14 @@ class ventana_principal:
             messagebox.showwarning("Error", "Llene el cuadro de texto")
         else:
             # Itera a través de la lista mensaje para verificar si el mensaje existe
-            nodo_mensaje=listaMensajeResivido.cabeza
-            while nodo_mensaje is not None:
-                if nodo_mensaje.mensaje_recibido.nombre_mensaje == nombre_mensaje:
+            n_Mensaje=listaMensajeResivido.cabeza
+            while n_Mensaje is not None:
+                if n_Mensaje.mensaje_recibido.nombre_mensaje == nombre_mensaje:
                     mensaje_existe=True
                     break
                 else:
                     # Avanza al siguiente nodo en la lista
-                    nodo_mensaje = nodo_mensaje.siguiente
+                    n_Mensaje = n_Mensaje.siguiente
             if mensaje_existe is True:
                 listaMensajeResivido.mostrar_mensajes_recibido_pantalla(nombre_mensaje,self.cuadroTexto)
                 messagebox.showinfo("Gestión", "Mensaje Mostrado ")

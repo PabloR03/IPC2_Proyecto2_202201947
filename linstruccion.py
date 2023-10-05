@@ -1,9 +1,9 @@
 # Importa tkinter
 import tkinter as tk
 
-from ninstruccion import nodo_instruccion
+from ninstruccion import n_Indicaciones
 
-class lista_doble_instruccion:
+class listaInstrucciones:
 
     def __init__(self):
         # Referencia al primer nodo
@@ -13,7 +13,7 @@ class lista_doble_instruccion:
     
     def insertar_instruccion(self, instruccion):
         # Creamos un nuevo nodo con el objeto proporcionado
-        nuevo_nodo = nodo_instruccion(instruccion=instruccion) 
+        nuevo_nodo = n_Indicaciones(instruccion=instruccion) 
         # Si la lista está vacía
         if self.cabeza is None:
             # El nuevo nodo se convierte en la cabeza 

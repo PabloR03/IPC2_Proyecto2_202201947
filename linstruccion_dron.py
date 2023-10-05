@@ -1,6 +1,6 @@
-from ninstruccion_dron import nodo_instruccion_dron
+from ninstruccion_dron import n_instruccionDron
 
-class lista_doble_instruccion_dron:
+class listaInstruccionDrones:
 
     def __init__(self):
         # Referencia al primer nodo
@@ -10,7 +10,7 @@ class lista_doble_instruccion_dron:
 
     def insertar_instruccion_dron(self, instruccion_dron):
         # Creamos un nuevo nodo con el objeto proporcionado
-        nuevo_nodo = nodo_instruccion_dron(instruccion_dron=instruccion_dron) 
+        nuevo_nodo = n_instruccionDron(instruccion_dron=instruccion_dron) 
         # Si la lista está vacía
         if self.cabeza is None:
             # El nuevo nodo se convierte en la cabeza 

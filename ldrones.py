@@ -1,9 +1,9 @@
 # Importa el nodo
-from ndrones import nodo_dron
+from ndrones import n_dron
 # Importa tkinter
 import tkinter as tk  
 
-class lista_drones:
+class listaDrones:
     def __init__(self):
         # Inicializa la cabeza de la lista como None
         self.cabeza = None  
@@ -11,8 +11,8 @@ class lista_drones:
         self.cola = None  
 
     def insertar_dron(self, nuevo_dron):
-        # Crea un nuevo nodo de tipo 'nodo_dron' con el dron proporcionado
-        nuevo_nodo = nodo_dron(nuevo_dron)
+        # Crea un nuevo nodo de tipo 'n_dron' con el dron proporcionado
+        nuevo_nodo = n_dron(nuevo_dron)
 
         if not self.cabeza:
             # Si la lista está vacía, el nuevo nodo se convierte en la cabeza

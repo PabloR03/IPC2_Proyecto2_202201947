@@ -1,6 +1,6 @@
-from ncontenido import nodo_contenido
+from ncontenido import n_caracteres
 
-class lista_doble_contenido:
+class listaCaracteresDrones:
 
     def __init__(self):
         # Referencia al primer nodo
@@ -10,7 +10,7 @@ class lista_doble_contenido:
 
     def insertar_contenido(self, contenido):
         # Creamos un nuevo nodo con el objeto proporcionado
-        nuevo_nodo = nodo_contenido(contenido=contenido) 
+        nuevo_nodo = n_caracteres(contenido=contenido) 
         # Si la lista está vacía
         if self.cabeza is None:
             # El nuevo nodo se convierte en la cabeza 

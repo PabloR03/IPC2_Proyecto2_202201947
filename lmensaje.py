@@ -1,8 +1,8 @@
 # Importa tkinter
 import tkinter as tk
-from nmensaje import nodo_mensaje
+from nmensaje import n_Mensaje
 
-class lista_doble_mensaje:
+class listaMensaje:
 
     def __init__(self):
         # Referencia al primer nodo
@@ -12,7 +12,7 @@ class lista_doble_mensaje:
 
     def insertar_mensaje(self, mensaje):
         # Creamos un nuevo nodo con el objeto proporcionado
-        nuevo_nodo = nodo_mensaje(mensaje=mensaje) 
+        nuevo_nodo = n_Mensaje(mensaje=mensaje) 
         # Si la lista está vacía o el nuevo mensaje va antes del primer mensaje en orden alfabético
         if self.cabeza is None or mensaje.nombre_mensaje < self.cabeza.mensaje.nombre_mensaje:
             # El nuevo nodo se convierte en la cabeza 
