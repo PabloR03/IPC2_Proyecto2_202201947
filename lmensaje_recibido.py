@@ -8,57 +8,40 @@ import os
 class listaMensajeIntercambiado:
 
     def __init__(self):
-        # Referencia al primer nodo
         self.cabeza = None  
-        # Referencia al último nodo
         self.cola = None  
 
     def insertar_mensaje_recibido(self, mensaje_recibido):
-        # Creamos un nuevo nodo con el objeto proporcionado
         nuevo_nodo = n_MensajeIntercambiado(mensaje_recibido=mensaje_recibido) 
-        # Si la lista está vacía
         if self.cabeza is None:
-            # El nuevo nodo se convierte en la cabeza 
             self.cabeza = nuevo_nodo
-            # El nuevo nodo también se convierte en la cola  
             self.cola = nuevo_nodo  
         else:
-            # El nuevo nodo apunta al nodo anterior
             nuevo_nodo.anterior = self.cola  
-            # El nodo anterior apunta al nuevo nodo
             self.cola.siguiente = nuevo_nodo  
-            # El nuevo nodo se convierte en la cola de la lista
             self.cola = nuevo_nodo 
 
     def mostrar_mensaje_recibido(self):
-        # Comenzamos desde la cabeza
         actual = self.cabeza  
-        print("----------------")
+        print("*******************************************")
         while actual:
-            # Imprimimos el objeto del nodo actual
             print("Nombre Mensaje:", actual.mensaje_recibido.nombre_mensaje, "Sistema Dron:", actual.mensaje_recibido.nombre_sistema_dron, "Tiempo Optimo:", actual.mensaje_recibido.tiempo_optimo, "Mensaje Recibido:", actual.mensaje_recibido.mensaje_recibido)
             print(" ")
             actual.mensaje_recibido.lista_dron_recibido.mostrar_dron_recibido()
-            # Avanzamos al siguiente nodo  
             actual = actual.siguiente 
-            # Imprimimos "None" al final para indicar el final de la lista
-        print("----------------")
+        print("*******************************************")
 
     def mostrar_mensajes_recibido_pantalla(self,nombre_mensaje,scrolled_text):
-        #Borra El Contenido Actual
         scrolled_text.delete(1.0, tk.END)
-        # Comenzamos desde la cabeza de la lista
         actual = self.cabeza  
         while actual:
             if actual.mensaje_recibido.nombre_mensaje==nombre_mensaje:
-                # Agrega el nombre del mensaje al scrolledtext
                 scrolled_text.insert(tk.END, "Nombre: "+ actual.mensaje_recibido.nombre_mensaje +'\n')
                 scrolled_text.insert(tk.END, "Sistema a utilizar: "+ actual.mensaje_recibido.nombre_sistema_dron +'\n')
                 scrolled_text.insert(tk.END, "Mensaje antes de enviar: "+actual.mensaje_recibido.mensaje_recibido+'\n')
                 scrolled_text.insert(tk.END, "Posible Tiempo en encriptar: "+str(actual.mensaje_recibido.tiempo_optimo)+'\n')
                 break
             else:
-                # Avanzamos al siguiente nodo
                 actual = actual.siguiente
 
     def escribir_archivo_salida(self):
@@ -109,7 +92,6 @@ class listaMensajeIntercambiado:
         arbol_xml.write("SALIDA_XML.xml",encoding="UTF-8",xml_declaration=True)
 
     def xml_identado(self, element, indent='  '):
-    # Esta función puede utilizarse para obtener la indentación adecuada en el XML.
         queue = [(0, element)]
         while queue:
             level, element = queue.pop(0)

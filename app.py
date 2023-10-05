@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import Menu
 from tkinter import messagebox, filedialog, scrolledtext, Label, Entry
 import os, subprocess
-#Impotar Listas y Clases
+#Impotar Listas y con sus clases
 
 from ldron import listaDron
 from odron import dron
@@ -32,7 +32,7 @@ from oinstruccion_dron import instruccion_dron
 from linstruccion import listaInstrucciones
 from oinstruccion import instruccion
 
-#Lista Global Par XML Entrada
+#Lista Global Para XML Entrada
 listaDronesparaTodo = listaDrones()
 listaSistemaparaTodo= listaSistemaDrones()
 listaMensajeparaTodo = listaMensaje()
@@ -124,13 +124,13 @@ class ventana_principal:
             with open(ruta_archivo, "r") as archivo:
                 tree = ET.parse(ruta_archivo)
                 root = tree.getroot()
-                #Lista Dron
+                #Lista que va a tener al Dron
                 nivel_drones = root.find('.//listaDrones')
                 for nivel_drones in nivel_drones.findall('.//dron'):
                     nombre_dron=nivel_drones.text
                     nuevo_dron=drones(nombre_dron)
                     listaDronesparaTodo.insertar_dron(nuevo_dron)
-                #Lista Sistema Drones
+                #Lista para el Sistema Drones
                 nivel_sistemas_drones = root.find('.//listaSistemasDrones')
                 for sistema_drones in nivel_sistemas_drones.findall('.//sistemaDrones'):
                     nombre_sistema = sistema_drones.get('nombre')
@@ -153,14 +153,14 @@ class ventana_principal:
                         lista_dron.insertar_dron(nuevo_dron)
                     nuevo_sistema=sistema(nombre_sistema, altura_maxima, cantidad_drones, lista_dron)
                     listaSistemaparaTodo.insertar_sistema(nuevo_sistema)
-                #Lista Mensajes
+                #Lista del mensjae para leer
                 lista_mensajes = root.find('.//listaMensajes')
                 for nivel_mensaje in lista_mensajes.findall('.//Mensaje'):
                     nombre_mensaje = nivel_mensaje.get('nombre') 
                     sistema_drones_mensaje = nivel_mensaje.find('sistemaDrones').text
                     #Contenido Instrucciones
                     nivel_instrucciones = nivel_mensaje.find('instrucciones')
-                    #Lista_Intruccion
+                    #lista de la instruccion
                     lista_instruccion_temporal=listaInstrucciones()
                     for nivel_instruccion in nivel_instrucciones.findall('instruccion'):
                         dron_instruccion = nivel_instruccion.get('dron')
@@ -240,17 +240,17 @@ class ventana_principal:
         mensaje_recibido_des=""
         tiempo_optimo_des=0
         while n_Mensaje is not None:
-            #Se Recorren Todos Los Mensajes
+            #Sbuscamos recorrer todos los mensaejes para encontrar el mensaje actual
             while nodo_mensaje_variable is not None:
                 if n_Mensaje.mensaje.nombre_mensaje == nodo_mensaje_variable.mensaje.nombre_mensaje:
-                    #--Nombre Del Mensaje
+                    #nombre para darle al mensaje
                     nombre_mensaje_recibido=n_Mensaje.mensaje.nombre_mensaje
                     n_sistemaDrones = listaSistemaparaTodo.cabeza
-                    #Se Recorren Los Sistemas Para encontrar Una Coincidencia
+                    #Se busca algunos para evitar que sean repetidos
                     while n_sistemaDrones is not None:
                         #Si el nombre_sistema_dron de mensaje es igual al nombre sistema del sistema 
                         if n_Mensaje.mensaje.nombre_sistema_dron == n_sistemaDrones.sistema.nombre_sistema:
-                            #--Nombre Del Sistema
+                            #indicacion Del Sistema
                             nombre_sistema_recibido=n_sistemaDrones.sistema.nombre_sistema
                             n_Indicaciones = n_Mensaje.mensaje.lista_instruccion.cabeza
                             #Se recorren las instrucciones del mensaje actual
@@ -268,76 +268,76 @@ class ventana_principal:
                                                 #--Mensaje Recibido
                                                 mensaje_recibido_des+=n_caracteres.contenido.simbolo_altura
                                             n_caracteres=n_caracteres.siguiente
-                                        break #Se rompe la iteracion del dron
-                                    #Si el nombre no es igual, se pasa el siguientre dron
+                                        break #Salimos del dron pa evitar errores
+                                    #Sya que no hay repetidos, vamos saltndo de dro en dron para ver que onda
                                     else:
                                         n_dron = n_dron.siguiente
-                                #Se pasa la siguiente instrucción
+                                #pasa a la instruccion siguiente del mensaje
                                 n_Indicaciones = n_Indicaciones.siguiente
-                            #Se crea un nodo dron para recorrer todos los drones del sistema
+                            #Snodo con el sistema actual
                             nodo_dron_tiempo=n_sistemaDrones.sistema.lista_dron.cabeza
-                            #Se crea una lista temporal dron recibido
+                            #una lista tempoiral para los drones
                             lista_dron_recibido_temporal=listaDronIntercambiado()
-                            #Se recorre cada dron del sistema
+                            #Svamos recorriendo todo para guardar las cosas
                             while nodo_dron_tiempo is not None:
-                                #--Nombre Dron Recibido
+                                #nombre del dron
                                 nombre_dron=nodo_dron_tiempo.dron.nombre_dron
-                                #Contador para saber el segundo
+                                #contador para tratar que no haga conflicto
                                 tiempo_optimo=1
-                                #Se crea un nodo instrucción para recorrer todas las instrucciones
+                                #se crea un dron temporal para guardar las instrucciones
                                 nodo_instruccion_mensaje=n_Mensaje.mensaje.lista_instruccion.cabeza
                                 #Se crea una lista instrucción dron temporal
                                 lista_instruccion_dron_temporal=listaInstruccionDrones()
-                                #Se recorre cada instrucción del sistema
+                                #Sse va recorriendo para encontrar las instrucciones del dron actual
                                 while nodo_instruccion_mensaje is not None:
-                                    #Si el nombre del dron de la instrucción es igual al nombre dron del dron actual
+                                    #ver que no hayan drones repetidos
                                     if nodo_instruccion_mensaje.instruccion.nombre_dron == nodo_dron_tiempo.dron.nombre_dron:
-                                        #Se inserta una nueva instrucción en el segundo actual
+                                        #Sse ke da la instruccion pa ese segundo
                                         accion="Emitir Luz"
                                         #Se crea una nueva instrucción dron y se inserta en la lista temporal
                                         nueva_instruccion_dron=instruccion_dron(tiempo_optimo, accion)
                                         lista_instruccion_dron_temporal.insertar_instruccion_dron(nueva_instruccion_dron)
-                                    #Si el nombre del dron de la instrucción no es igual al nombre dron del dron actual
+                                    #resto de condiciones
                                     elif nodo_instruccion_mensaje.instruccion.nombre_dron != nodo_dron_tiempo.dron.nombre_dron:
-                                        #Se inserta una nueva instrucción en el segundo actual
+                                        #se le da una nueva orden a esa wea
                                         accion="Esperar"
-                                        #Se crea una nueva instrucción dron y se inserta en la lista temporal
+                                        #nueva instruccion pa esa onda pa que no se repita
                                         nueva_instruccion_dron=instruccion_dron(tiempo_optimo, accion)
                                         lista_instruccion_dron_temporal.insertar_instruccion_dron(nueva_instruccion_dron)
-                                    #Se aumenta el contador del segundo
+                                    #aumentamos el tiempo, nimodo que no aumente el tiempo
                                     tiempo_optimo+=1
-                                    #Se Pasa a la siguiente instrucción
+                                    #pasamos a la otra instruccion
                                     nodo_instruccion_mensaje=nodo_instruccion_mensaje.siguiente
-                                #Se crea un nuevo dron recibido y se inserta en la lista
+                                #Se crea un nuevo dron pa agrefar a la lista de dron recibido
                                 nuevo_don_recibido=dron_recibido(nombre_dron,lista_instruccion_dron_temporal)
                                 lista_dron_recibido_temporal.insertar_dron_recibido(nuevo_don_recibido)
-                                #Se reinicia el contador del segundo actual
+                                #Se reiniciamos contador porque es nueva instruccion
                                 tiempo_optimo=1
-                                #Se pasa al siguiente dron
+                                #Se salta al otro dron 
                                 nodo_dron_tiempo=nodo_dron_tiempo.siguiente
-                            #Se recorre cada instrucción del sistema
+                            #Se va pasando a todas las instrucciones del mensaje
                             nodo_instruccion_tiempo=n_Mensaje.mensaje.lista_instruccion.cabeza
-                            #Se recore la lista de instrucciones
+                            #Se recore la lista de mensajes
                             while nodo_instruccion_tiempo is not None:
-                                #Se aumenta en 1 el tiempo por cada instruccón
+                                #Se aumenta un segundo a cada instruccion asksdkaskdk
                                 tiempo_optimo_des+=1
                                 #Se pasa a la siguiente instrucción
                                 nodo_instruccion_tiempo=nodo_instruccion_tiempo.siguiente
-                            #Se crea un nuevo mensaje recibido y se inserta en la lista
+                            #Se nuevo mensaje pero saber que onda no me jalo
                             nuevo_mensaje_recibido=mensaje_recibido(nombre_mensaje_recibido, nombre_sistema_recibido, tiempo_optimo_des, mensaje_recibido_des, lista_dron_recibido_temporal)
                             listaMensajeResivido.insertar_mensaje_recibido(nuevo_mensaje_recibido) 
-                            #Se reinicia la cadena y los contadores
+                            #Sereiniciamos todo, ya ni pa donde
                             mensaje_recibido_des=""
                             tiempo_optimo_des=0
-                            break #Se Rompre La Iteracion Del Sistema
+                            break
                         else:
-                            #Se pasa al siguiente sistema
+                            #siguiente sistema para hacer la misma onda 
                             n_sistemaDrones=n_sistemaDrones.siguiente
-                    break #Se Rompre La Iteración Del Mensaje
+                    break
                 else:
-                    #Se pasa al siguiente mensaje
+                    #Ssiguiente mensaje pirque hay que cubrir todo
                     nodo_mensaje_variable=nodo_mensaje_variable.siguiente
-            #Se pasa al siguiente mensaje
+            #Sya lo ultimo que recorre y sale
             n_Mensaje=n_Mensaje.siguiente
 
 #Función General: Generar archivo XML de salida
@@ -384,22 +384,22 @@ class ventana_principal:
         if listaMensajeResivido.cabeza is None:
             messagebox.showwarning("Error ", "No hay archivo cargado")
             return
-        #Obtiene el nombre del mensaje desde la caja_texto
+        #limpiamos todo y alistamos el cuadro para pegar todo
         nombre_mensaje=self.text_area.get("1.0", "end-1c")
-        #Variable Para Saber si el mensaje Existe
+        #verificamos que exista algo
         mensaje_existe=False
-        #Verifica si el nombre del mensaje es una cadena vacía
+        #se aserciora que haya de todo sino un dron en blanco
         if nombre_mensaje == "":
             messagebox.showwarning("Error", "Llene el cuadro de texto")
         else:
-            # Itera a través de la lista mensaje para verificar si el mensaje existe
+            # se encicla esa onda para ver los mensajes hata que lea todos sale
             n_Mensaje=listaMensajeResivido.cabeza
             while n_Mensaje is not None:
                 if n_Mensaje.mensaje_recibido.nombre_mensaje == nombre_mensaje:
                     mensaje_existe=True
                     break
                 else:
-                    # Avanza al siguiente nodo en la lista
+                    # vamos pal siguiente nodo
                     n_Mensaje = n_Mensaje.siguiente
             if mensaje_existe is True:
                 listaMensajeResivido.mostrar_mensajes_recibido_pantalla(nombre_mensaje,self.cuadroTexto)
