@@ -1,6 +1,6 @@
-from nodo_contenido import nodo_contenido
+from ndron import nodo_dron
 
-class lista_doble_contenido:
+class lista_doble_dron:
 
     def __init__(self):
         # Referencia al primer nodo
@@ -8,9 +8,9 @@ class lista_doble_contenido:
         # Referencia al último nodo
         self.cola = None  
 
-    def insertar_contenido(self, contenido):
+    def insertar_dron(self, dron):
         # Creamos un nuevo nodo con el objeto proporcionado
-        nuevo_nodo = nodo_contenido(contenido=contenido) 
+        nuevo_nodo = nodo_dron(dron=dron) 
         # Si la lista está vacía
         if self.cabeza is None:
             # El nuevo nodo se convierte en la cabeza 
@@ -25,15 +25,16 @@ class lista_doble_contenido:
             # El nuevo nodo se convierte en la cola de la lista
             self.cola = nuevo_nodo 
 
-
-    def mostrar_contenido(self):
+    def mostrar_drones(self):
         # Comenzamos desde la cabeza
         actual = self.cabeza  
-        print("---------")
+        print("---------------Datos De Los Drones----------------")
         while actual:
             # Imprimimos el objeto del nodo actual
-            print("Nombre Dron:", actual.contenido.nombre_dron, "Altura:", actual.contenido.altura_dron, "Simbolo:", actual.contenido.simbolo_altura)
+            print(actual.dron.nombre_dron)
+            actual.dron.lista_contenido.mostrar_contenido()
             # Avanzamos al siguiente nodo  
             actual = actual.siguiente 
             # Imprimimos "None" al final para indicar el final de la lista
-        print("----------")
+        print("**************************************************")
+        print("")

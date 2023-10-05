@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<respuesta>
+  <listaMensajes>
+    <mensaje nombre="msg">
+      <sistemaDrones>SD1</sistemaDrones>
+      <tiempoOptimo>4</tiempoOptimo>
+      <mensajeRecibido>IPC2</mensajeRecibido>
+      <instrucciones>
+        <tiempo valor="1">
+          <acciones>
+            <Dron nombre="DronX">Emitir Luz</Dron>
+            <Dron nombre="DronY">Esperar</Dron>
+            <Dron nombre="DronZ">Esperar</Dron>
+        </acciones>
+        </tiempo>
+        <tiempo valor="2">
+          <acciones>
+            <Dron nombre="DronX">Esperar</Dron>
+            <Dron nombre="DronY">Emitir Luz</Dron>
+            <Dron nombre="DronZ">Esperar</Dron>
+        </acciones>
+        </tiempo>
+        <tiempo valor="3">
+          <acciones>
+            <Dron nombre="DronX">Esperar</Dron>
+            <Dron nombre="DronY">Esperar</Dron>
+            <Dron nombre="DronZ">Emitir Luz</Dron>
+        </acciones>
+        </tiempo>
+        <tiempo valor="4">
+          <acciones>
+            <Dron nombre="DronX">Esperar</Dron>
+            <Dron nombre="DronY">Emitir Luz</Dron>
+            <Dron nombre="DronZ">Esperar</Dron>
+    </acciones>
+    </tiempo>
+    </instrucciones>
+    </mensaje>
+    <mensaje nombre="msg2">
+      <sistemaDrones>SDF</sistemaDrones>
+      <tiempoOptimo>4</tiempoOptimo>
+      <mensajeRecibido>IPC2</mensajeRecibido>
+      <instrucciones>
+        <tiempo valor="1">
+          <acciones>
+            <Dron nombre="DronW">Emitir Luz</Dron>
+            <Dron nombre="DronX">Esperar</Dron>
+            <Dron nombre="DronY">Esperar</Dron>
+            <Dron nombre="DronZ">Esperar</Dron>
+        </acciones>
+        </tiempo>
+        <tiempo valor="2">
+          <acciones>
+            <Dron nombre="DronW">Esperar</Dron>
+            <Dron nombre="DronX">Emitir Luz</Dron>
+            <Dron nombre="DronY">Esperar</Dron>
+            <Dron nombre="DronZ">Esperar</Dron>
+        </acciones>
+        </tiempo>
+        <tiempo valor="3">
+          <acciones>
+            <Dron nombre="DronW">Esperar</Dron>
+            <Dron nombre="DronX">Esperar</Dron>
+            <Dron nombre="DronY">Emitir Luz</Dron>
+            <Dron nombre="DronZ">Esperar</Dron>
+        </acciones>
+        </tiempo>
+        <tiempo valor="4">
+          <acciones>
+            <Dron nombre="DronW">Esperar</Dron>
+            <Dron nombre="DronX">Esperar</Dron>
+            <Dron nombre="DronY">Esperar</Dron>
+            <Dron nombre="DronZ">Emitir Luz</Dron>
+          </acciones>
+        </tiempo>
+      </instrucciones>
+    </mensaje>
+  </listaMensajes>
+</respuesta>

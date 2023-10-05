@@ -1,0 +1,22 @@
+
+                digraph G {
+                subgraph cluster_0 {fillcolor="limegreen" style="filled" gradientangle="200"
+                    node [ style=filled,shape="square",fillcolor="palegreen" ]"Altura: 1";
+                    node [ style=filled,shape="square",fillcolor="palegreen" ]"Cantidad: 4";
+                    label=" SDF"
+                    }
+                a0 [shape=none label=<
+                <TABLE border="0" cellspacing="10" cellpadding="10">
+
+                <TR><TD bgcolor="steelblue" gradientangle="315">Altura (metros)</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">1</TD>
+</TR><TR><TD style="radial" bgcolor="steelblue"  gradientangle="60">DronW</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">I</TD>
+</TR><TR><TD style="radial" bgcolor="steelblue"  gradientangle="60">DronX</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">P</TD>
+</TR><TR><TD style="radial" bgcolor="steelblue"  gradientangle="60">DronY</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">C</TD>
+</TR><TR><TD style="radial" bgcolor="steelblue"  gradientangle="60">DronZ</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">2</TD>
+</TR></TABLE>>];
+}

@@ -1,0 +1,44 @@
+
+                digraph G {
+                subgraph cluster_0 {fillcolor="limegreen" style="filled" gradientangle="200"
+                    node [ style=filled,shape="square",fillcolor="palegreen" ]"Altura: 7";
+                    node [ style=filled,shape="square",fillcolor="palegreen" ]"Cantidad: 3";
+                    label=" SD1"
+                    }
+                a0 [shape=none label=<
+                <TABLE border="0" cellspacing="10" cellpadding="10">
+
+                <TR><TD bgcolor="steelblue" gradientangle="315">Altura (metros)</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">1</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">2</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">3</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">4</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">5</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">6</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">7</TD>
+</TR><TR><TD style="radial" bgcolor="steelblue"  gradientangle="60">DronX</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">A</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">I</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">D</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">F</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">I</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">J</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">K</TD>
+</TR><TR><TD style="radial" bgcolor="steelblue"  gradientangle="60">DronY</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">2</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">C</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">P</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">G</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">L</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">M</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">N</TD>
+</TR><TR><TD style="radial" bgcolor="steelblue"  gradientangle="60">DronZ</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">B</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">C</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">E</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">H</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">O</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">P</TD>
+<TD style="radial" bgcolor="skyblue" gradientangle="60">Q</TD>
+</TR></TABLE>>];
+}

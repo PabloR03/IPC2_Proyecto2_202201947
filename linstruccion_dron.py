@@ -1,6 +1,6 @@
-from nodo_sistema import nodo_sistema
+from ninstruccion_dron import nodo_instruccion_dron
 
-class lista_doble_sistema:
+class lista_doble_instruccion_dron:
 
     def __init__(self):
         # Referencia al primer nodo
@@ -8,9 +8,9 @@ class lista_doble_sistema:
         # Referencia al último nodo
         self.cola = None  
 
-    def insertar_sistema(self, sistema):
+    def insertar_instruccion_dron(self, instruccion_dron):
         # Creamos un nuevo nodo con el objeto proporcionado
-        nuevo_nodo = nodo_sistema(sistema=sistema) 
+        nuevo_nodo = nodo_instruccion_dron(instruccion_dron=instruccion_dron) 
         # Si la lista está vacía
         if self.cabeza is None:
             # El nuevo nodo se convierte en la cabeza 
@@ -24,16 +24,15 @@ class lista_doble_sistema:
             self.cola.siguiente = nuevo_nodo  
             # El nuevo nodo se convierte en la cola de la lista
             self.cola = nuevo_nodo 
-
-    def mostrar_sistema(self):
+    
+    def mostrar_instruccion_dron(self):
         # Comenzamos desde la cabeza
         actual = self.cabeza  
-        print("----------------")
+        print("*************************************************")
         while actual:
             # Imprimimos el objeto del nodo actual
-            print("Nombre Sistema:", actual.sistema.nombre_sistema, "Altura Máxima Sistema:", actual.sistema.altura_sistema, "Cantidad Drones:", actual.sistema.cantidad_drones)
-            actual.sistema.lista_contenido.mostrar_contenido()
+            print("Tiempo:", actual.instruccion_dron.tiempo, "Acción:", actual.instruccion_dron.accion)
             # Avanzamos al siguiente nodo  
             actual = actual.siguiente 
             # Imprimimos "None" al final para indicar el final de la lista
-        print("----------------")
+        print("*************************************************")
